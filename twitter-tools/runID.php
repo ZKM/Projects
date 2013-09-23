@@ -41,7 +41,7 @@ if($zeroArray['Valid'][0] == 0){
     //mysql_close();
     //include('con.php');
     //$query = "SELECT `twitter_id`  FROM `" . $dbtable . "` WHERE `processed` !=1 LIMIT 0, 10000";
-    $query = "SELECT `twitter_id`  FROM `".$dbtable."` WHERE `Valid` !=1 LIMIT 0, 10000";
+    $query = "SELECT `twitter_id`  FROM `".$dbtable."` WHERE `Valid` !=1 LIMIT 0, 25000";
     
     $result = mysql_query($query);
     if (!$result) {
@@ -102,24 +102,26 @@ if($zeroArray['Valid'][0] == 0){
             'user_id' => $handle_string
         ));
         foreach ($usercontent as $user) {
-            $twitter_id       = $user->id; //twitter ID
-            $protected        = $user->protected; //public or private account
-            $screen_name      = $user->screen_name; //screen name
-            $name             = $user->name; //real name
-            $description      = $user->description; //description
-            $location         = $user->location; //location
-            $url              = $user->url; //profile URL
-            $followers_count  = $user->followers_count; //number of followers
-            $friends_count    = $user->friends_count; //number of following
-            $num_tweets       = $user->statuses_count; //number of updates
-            $time_zone        = $user->time_zone; //time zone
-            $account_creation = $user->created_at; //created twitter account
-            $last_tweet_date  = $user->status->created_at; //last tweet date
-            if ($protected == "true") {
+            $twitter_id       = $user->id;                      //twitter ID
+            $protected        = $user->protected;               //public or private account
+            $screen_name      = $user->screen_name;             //screen name
+            $name             = $user->name;                    //real name
+            $description      = $user->description;             //description
+            $location         = $user->location;                //location
+            $url              = $user->url;                     //profile URL
+            $followers_count  = $user->followers_count;         //number of followers
+            $friends_count    = $user->friends_count;           //number of following
+            $num_tweets       = $user->statuses_count;          //number of updates
+            $time_zone        = $user->time_zone;               //time zone
+            $account_creation = $user->created_at;              //created twitter account
+            $last_tweet_date  = $user->status->created_at;      //last tweet date
+            $lang             = $user->lang;                    //language
+            if ($protected == "true") {                         // protected tweets
                 $protected = "Protected";
             } else {
                 $protected = "Public";
             }
+
             include('con.php');
             $u = "UPDATE  `" . $dbname . "`.`" . $dbtable . "` SET 
         	`Valid` = '1', 
@@ -135,7 +137,8 @@ if($zeroArray['Valid'][0] == 0){
         	`num_tweets` = '" . mysql_real_escape_string($num_tweets) . "', 
         	`time_zone` = '" . mysql_real_escape_string($time_zone) . "', 
         	`creation_date` = '" . mysql_real_escape_string($account_creation) . "', 
-        	`last_tweet` = '" . mysql_real_escape_string($last_tweet_date) . "', 
+            `last_tweet` = '" . mysql_real_escape_string($last_tweet_date) . "', 
+            `lang` = '" . mysql_real_escape_string($lang) . "', 
         	`timestamp` = '" . mysql_real_escape_string($date) . "' 
         	
         	WHERE `" . $dbtable . "`.`twitter_id` = '" . mysql_real_escape_string($twitter_id) . " AND `processed` = 1';";
@@ -148,6 +151,7 @@ if($zeroArray['Valid'][0] == 0){
                 die($message);
             }
             echo "SUCCESS!" . "\n";
+            print_r($usercontent);
             /*
             print "<ul>
             <li><strong>Twitter ID:</strong> " . $twitter_id . "</li>

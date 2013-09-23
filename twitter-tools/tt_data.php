@@ -46,15 +46,15 @@ print "Logged in: <strong>" . $screen_name . "</strong> <br>";
 
 if ($screen_names == null) {
 	//======== Twidal ========//
-	foreach ($usercontent as $user) {
-		$twitter_id = $user->id;
-	}
-	print "<strong>Twitter ID:</strong> " . $twitter_id . "<br>";
-	print "<strong>Title:</strong> " . $report_title ."<br>";	
-	print "<strong>Email:</strong> " . $report_email ."<br>";	
-	
+	// foreach ($usercontent as $user) {
+	// 	$twitter_id = $user->id;
+	// 	print "<strong>Twitter ID:</strong> " . $twitter_id . "<br>";
+	// 	print "<strong>Title:</strong> " . $report_title ."<br>";	
+	// 	print "<strong>Email:</strong> " . $report_email ."<br>";	
+	// }
+
 	//$method = "followers/ids/$twitter_id";
-	$method = "followers/ids.json?cursor=-1&screen_name=" . $screen_name . "&count=100";
+	$method = "followers/ids.json?cursor=-1&screen_name=" . $screen_name . "&count=1000";
 	
 	$cursor = -1;
 	include('con.php');
@@ -62,8 +62,9 @@ if ($screen_names == null) {
 		$followers = $connection->get($method, array('cursor' => $cursor));
 		echo "<pre>";
 		print_r($followers);
+		print_r("collecting..");
 		echo "</pre>";
-		break;
+		//break;
 		foreach ($followers as $element) {
 		    if ( is_array($element)) {
 		        foreach ( $element as $sub_element) {
@@ -146,6 +147,7 @@ if ($screen_names == null) {
 	        $time_zone 			= $user->time_zone; 				//time zone
 	        $account_creation 	= $user->created_at; 				//created twitter account
 	        $last_tweet_date 	= $user->status->created_at; 		//last tweet date
+	        $lang				= $user->status->lang;				//language
 	
 	        if ($protected == "true") {
 	        	$protected = "Protected";

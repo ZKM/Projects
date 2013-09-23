@@ -5,9 +5,9 @@ $dbtable = "master_dt";
 include('con.php');
 
 $all = "SELECT *  FROM `".$dbtable."`";
-$cricketNation = "SELECT * FROM `".$dbtable."` WHERE  `report_title` LIKE  'Cricketnation'"
+$cricketNation = "SELECT * FROM `".$dbtable."` WHERE  `report_title` LIKE  'Zocalo Group'";
 
-$export = mysql_query($cricketNation) or die("Sql error : " . mysql_error());
+$export = mysql_query($all) or die("Sql error: " . mysql_error());
 $fields = mysql_num_fields($export);
 
 for ($i = 0; $i < $fields; $i++) {
