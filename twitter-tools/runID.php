@@ -41,7 +41,7 @@ if($zeroArray['Valid'][0] == 0){
     //mysql_close();
     //include('con.php');
     //$query = "SELECT `twitter_id`  FROM `" . $dbtable . "` WHERE `processed` !=1 LIMIT 0, 10000";
-    $query = "SELECT `twitter_id`  FROM `".$dbtable."` WHERE `Valid` !=1 LIMIT 0, 25000";
+    $query = "SELECT `twitter_id`  FROM `".$dbtable."` WHERE `Valid` !=1 LIMIT 0, 10000";
     
     $result = mysql_query($query);
     if (!$result) {
@@ -151,7 +151,7 @@ if($zeroArray['Valid'][0] == 0){
                 die($message);
             }
             echo "SUCCESS!" . "\n";
-            print_r($usercontent);
+            // print_r($usercontent);
             /*
             print "<ul>
             <li><strong>Twitter ID:</strong> " . $twitter_id . "</li>
