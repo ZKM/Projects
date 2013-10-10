@@ -57,10 +57,15 @@ if ($screen_names == null) {
 	$method = "followers/ids.json?cursor=-1&screen_name=" . $screen_name . "&count=10000";
 	
 	$cursor = -1;
+
+	// Nissan
 	// $cursor = 1445724334656947312;
 	// $cursor = 1442351989753529513;
 	// $cursor = 1438599641798563365;
 	// $cursor = 1390571066095573256;
+
+	// VMware
+	// $cursor = 1357570478756687544;
 
 
 	include('con.php');
