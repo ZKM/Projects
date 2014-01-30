@@ -17,7 +17,7 @@ $zeroSetResult = mysql_query($zeroSet) or die('Error, query failed');
 $zeroArray = (mysql_fetch_array($zeroSetResult));
 //print_r($zeroArray);
 
-//if ($zeroArray['processed'][0] == 0) {
+// if ($zeroArray['processed'][0] == 0) {
 if($zeroArray['Valid'][0] == 0){
     
     /* If access tokens are not available redirect to connect page. */
