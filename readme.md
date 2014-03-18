@@ -2,6 +2,8 @@
 
 These are a list of a few different projects that I wanted to open up to the OpenSource community. 
 
+Emails - http://zocalo-group.github.io/Projects/email/
+
 
 The MIT License
 ===============
