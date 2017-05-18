@@ -2,9 +2,6 @@
 
 These are a list of a few different projects that I wanted to open up to the OpenSource community. 
 
-Emails - http://zkm.github.io/Projects/email/
-
-
 The MIT License
 ===============
 
